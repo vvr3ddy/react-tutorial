@@ -18,17 +18,29 @@ const Home = () => {
         setBlogs(newBlogs);
     };
 
+    const [name, setName] = useState('Mario');
+
     useEffect(() => {
         // This effect will run when the component mounts
         // It will fetch the blog data from the server
         // and update the state
+        // Empty dependency array ensures the effect will run
+        // only when the component mounts
+        // The effect will run only once
+        
+        //  Adding dependencies to the array ensure the effect
+        // will run when the component mounts
+        // and when the state changes
+        // The effect will run when the component mounts
         console.log('Home - effect ran');
-        console.log(blogs);
-    });
+        console.log(name);
+    }, [name]);
 
     return (
         <div className="home">
             <BlogList blogs={blogs} title="All Blogs" handleDelete={handleDelete}/>
+            <button onClick={()=>setName('Yoshi')}>Change Name</button>
+            <p>Hello {name}</p>
         </div>
     );
 }
