@@ -1,20 +1,24 @@
 import { useState } from 'react';
 
 const Home = () => {
-    // let name = "Mario";
-    const [name, setName] = useState("Mario");
-    const [age, setAge] = useState(12);
-    const handleClick = (e) => {
-        setName("Luigi");
-        setAge(30);
-    };
+    const [blogs, setBlogs] = useState([
+        { title: 'My First Blog', body: 'This is my first blog post', author: 'Mario', id: 1 },
+        { title: 'My Second Blog', body: 'This is my second blog post', author: 'Luigi', id: 2 },
+        { title: 'My Third Blog', body: 'This is my third blog post', author: 'Peach', id: 3 },
+        { title: 'My Fourth Blog', body: 'This is my fourth blog post', author: 'Daisy', id: 4 },
+        { title: 'My Fifth Blog', body: 'This is my fifth blog post', author: 'Mushroom', id: 5 },
+        { title: 'My Sixth Blog', body: 'This is my sixth blog post', author: 'Luigi', id: 6 },
+    ]);
     return (
         <div className="home">
-            <h2>Homepage</h2>
-            {/* Don't invoke the function, just set a reference by calling the name only */}
-            <button onClick={handleClick}>Click me</button>
-            <p>{name} is {age} years old</p>
-
+            {blogs.map((blog) => (
+                // Key Must be Unique
+                <div className="blog-preview" key={blog.id}>
+                    <h2>{blog.title}</h2>
+                    <p>Written By: {blog.author}</p>
+                    <br />
+                </div>
+            ))}
         </div>
     );
 }
