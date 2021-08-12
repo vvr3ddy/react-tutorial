@@ -14,8 +14,8 @@ const Home = () => {
     ]);
     return (
         <div className="home">
-            {/* blogs in the {} is the prop which travels from Home.js to BlogList.js */}
             <BlogList blogs={blogs} title="All Blogs"/>
+            <BlogList blogs={blogs.filter((blog)=>blog.author==="Luigi")} title="Luigi's Blogs"/>
         </div>
     );
 }
