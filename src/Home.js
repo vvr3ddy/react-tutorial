@@ -1,6 +1,9 @@
 import { useState } from 'react';
+import BlogList from './BlogList';
 
 const Home = () => {
+    // Props - Global scoped variables
+    
     const [blogs, setBlogs] = useState([
         { title: 'My First Blog', body: 'This is my first blog post', author: 'Mario', id: 1 },
         { title: 'My Second Blog', body: 'This is my second blog post', author: 'Luigi', id: 2 },
@@ -11,14 +14,8 @@ const Home = () => {
     ]);
     return (
         <div className="home">
-            {blogs.map((blog) => (
-                // Key Must be Unique
-                <div className="blog-preview" key={blog.id}>
-                    <h2>{blog.title}</h2>
-                    <p>Written By: {blog.author}</p>
-                    <br />
-                </div>
-            ))}
+            {/* blogs in the {} is the prop which travels from Home.js to BlogList.js */}
+            <BlogList blogs={blogs} title="All Blogs"/>
         </div>
     );
 }
