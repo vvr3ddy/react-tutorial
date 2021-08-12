@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import BlogList from './BlogList';
 
 const Home = () => {
@@ -17,6 +17,14 @@ const Home = () => {
         const newBlogs = blogs.filter(blog => blog.id !== blogId);
         setBlogs(newBlogs);
     };
+
+    useEffect(() => {
+        // This effect will run when the component mounts
+        // It will fetch the blog data from the server
+        // and update the state
+        console.log('Home - effect ran');
+        console.log(blogs);
+    });
 
     return (
         <div className="home">
