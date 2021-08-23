@@ -5,17 +5,21 @@ const Home = () => {
 
     const [blogs, setBlogs] = useState(null);
 
-    const [name, setName] = useState('Mario');
+    const [isPending, setIsPending] = useState(true);
 
     useEffect(() => {
-        fetch('http://localhost:8000/blogs')
-            .then(response => {
-                return response.json();
-            })
-            .then(data => {
-                console.log(data);
-                setBlogs(data);
-            });
+        setTimeout(() => {
+            fetch('http://localhost:8000/blogs')
+                .then(response => {
+                    return response.json();
+                })
+                .then(data => {
+                    console.log(data);
+                    setIsPending(false);
+                    setBlogs(data);
+                });
+        }, 1000);
+
     }, []);
 
     return (
@@ -23,6 +27,7 @@ const Home = () => {
             {/* Conditional Rendering
             if blogs is null/false, the right hand side of && is never rendered 
             */}
+            {isPending && <div>Loading...</div>}
             {blogs && <BlogList blogs={blogs} title="All Blogs" />}
         </div>
     );
