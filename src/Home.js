@@ -2,45 +2,28 @@ import { useEffect, useState } from 'react';
 import BlogList from './BlogList';
 
 const Home = () => {
-    // Props - Global scoped variables
 
-    const [blogs, setBlogs] = useState([
-        { title: 'My First Blog', body: 'This is my first blog post', author: 'Mario', id: 1 },
-        { title: 'My Second Blog', body: 'This is my second blog post', author: 'Luigi', id: 2 },
-        { title: 'My Third Blog', body: 'This is my third blog post', author: 'Peach', id: 3 },
-        { title: 'My Fourth Blog', body: 'This is my fourth blog post', author: 'Daisy', id: 4 },
-        { title: 'My Fifth Blog', body: 'This is my fifth blog post', author: 'Mushroom', id: 5 },
-        { title: 'My Sixth Blog', body: 'This is my sixth blog post', author: 'Luigi', id: 6 },
-    ]);
-
-    const handleDelete = (blogId) => {
-        const newBlogs = blogs.filter(blog => blog.id !== blogId);
-        setBlogs(newBlogs);
-    };
+    const [blogs, setBlogs] = useState(null);
 
     const [name, setName] = useState('Mario');
 
     useEffect(() => {
-        // This effect will run when the component mounts
-        // It will fetch the blog data from the server
-        // and update the state
-        // Empty dependency array ensures the effect will run
-        // only when the component mounts
-        // The effect will run only once
-        
-        //  Adding dependencies to the array ensure the effect
-        // will run when the component mounts
-        // and when the state changes
-        // The effect will run when the component mounts
-        console.log('Home - effect ran');
-        console.log(name);
-    }, [name]);
+        fetch('http://localhost:8000/blogs')
+            .then(response => {
+                return response.json();
+            })
+            .then(data => {
+                console.log(data);
+                setBlogs(data);
+            });
+    }, []);
 
     return (
         <div className="home">
-            <BlogList blogs={blogs} title="All Blogs" handleDelete={handleDelete}/>
-            <button onClick={()=>setName('Yoshi')}>Change Name</button>
-            <p>Hello {name}</p>
+            {/* Conditional Rendering
+            if blogs is null/false, the right hand side of && is never rendered 
+            */}
+            {blogs && <BlogList blogs={blogs} title="All Blogs" />}
         </div>
     );
 }

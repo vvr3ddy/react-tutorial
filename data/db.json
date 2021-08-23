@@ -1,0 +1,22 @@
+{
+  "blogs": [
+    {
+      "title": "Blog 1",
+      "description": "This is the first blog",
+      "author": "John Doe",
+      "id": 1
+    },
+    {
+      "title": "Blog 2",
+      "description": "This is the second blog",
+      "author": "Jane Doe",
+      "id": 2
+    },
+    {
+      "title": "Blog 3",
+      "description": "This is the third blog",
+      "author": "John Doe",
+      "id": 3
+    }
+  ]
+}
